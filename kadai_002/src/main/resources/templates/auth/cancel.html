@@ -1,0 +1,54 @@
+ <!DOCTYPE html>
+ <html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+     <head>
+         <div th:replace="~{fragment :: meta}"></div>   
+              
+         <div th:replace="~{fragment :: styles}"></div> 
+         
+         <title>有料会員解約</title>       
+     </head>
+     <body>
+         <div class="taberogu-wrapper">
+             <!-- ヘッダー -->
+             <div th:replace="~{fragment :: header}"></div>
+             
+             <main>				 
+				  <div class="container taberogu-container pb-5">
+                     <div class="row justify-content-center">
+                         <nav class="my-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                             <ol class="breadcrumb mb-0">                        
+                                 <li class="breadcrumb-item"><a th:href="@{/}">ホーム</a></li>
+                                 <li class="breadcrumb-item active" aria-current="page">有料会員解約</li>
+                             </ol>
+                         </nav> 
+     
+                         <div class="col-xl-3 col-lg-4 col-md-5 col-sm-7">                            
+                             <h1 class="mb-4 text-center">有料会員解約</h1> 
+                             
+                             <form method="post" th:action="@{/cancel/update}" th:object="${subscriptionForm}" enctype="multipart/form-data"> 
+                                 <input type="hidden" th:field="*{user_id}">    
+                                 <input type="hidden" id="1" name="role" value=1>
+      
+                                 <div class="form-group mb-3">
+                                     有料会員解約すると店舗の予約とレビューの投稿ができなくなります。
+                                     <br>本当に解約してもよろしいですか？
+                                 </div>
+                                 
+                                 <div class="form-group d-flex justify-content-center my-4">
+                                     <button type="submit" class="btn text-white shadow-sm w-100 taberogu-btn">解約</button>
+                                 </div>
+                             </form>
+                          </div>                                                 
+                      </div>
+                   </div>
+                
+               </main>           
+            </div>
+             
+             <!-- フッター -->
+             <div th:replace="~{fragment :: footer}"></div>
+         </div>    
+         
+         <div th:replace="~{fragment :: scripts}"></div>         
+     </body>
+ </html>

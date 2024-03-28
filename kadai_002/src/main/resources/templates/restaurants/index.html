@@ -1,0 +1,189 @@
+ <!DOCTYPE html>
+ <html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">    
+     <head>
+         <div th:replace="~{fragment :: meta}"></div>   
+              
+         <div th:replace="~{fragment :: styles}"></div>
+           
+         <title>店舗一覧</title>   
+     </head>
+     <body>
+         <div class="taberogu-wrapper">
+             <!-- ヘッダー -->
+             <div th:replace="~{fragment :: header}"></div>
+             
+             <main>
+                 <div class="container taberogu-container pb-5">
+                     <div class="row justify-content-center">
+                         <nav class="my-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                             <ol class="breadcrumb mb-0">                        
+                                 <li class="breadcrumb-item"><a th:href="@{/}">ホーム</a></li>
+                                 <li class="breadcrumb-item active" aria-current="page">店舗一覧</li>
+                             </ol>
+                         </nav>         
+             
+                         <div class="col-xl-3 col-lg-4 col-md-12">               
+                             <form method="get" th:action="@{/restaurants}" class="w-100 mb-3">
+                                 <div class="input-group">
+                                     <input type="text" class="form-control" name="keyword" th:value="${keyword}" placeholder="店舗名・エリア">
+                                     <button type="submit" class="btn text-white shadow-sm taberogu-btn">検索</button> 
+                                 </div>               
+                             </form>
+             
+                             <div class="card mb-3">
+                                 <div class="card-header">
+                                     カテゴリから探す
+                                 </div>
+                                 <div class="card-body">
+                                     <form method="get" th:action="@{/restaurants}" class="w-100">
+                                         <div class="form-group mb-3">
+                                             <select class="form-control form-select" name="category">
+                                                 <option value="" hidden>選択してください</option> 
+                                                 <option value="1" th:selected="${category == 1}">居酒屋</option>
+                                                 <option value="2" th:selected="${category == 2}">焼肉</option>
+                                                 <option value="3" th:selected="${category == 3}">寿司</option>
+                                                 <option value="4" th:selected="${category == 4}">ラーメン</option>
+                                                 <option value="5" th:selected="${category == 5}">定食</option>
+                                                 <option value="6" th:selected="${category == 6}">カレー</option>
+                                                 <option value="7" th:selected="${category == 7}">喫茶店</option>
+                                                 <option value="8" th:selected="${category == 8}">中華料理</option>
+                                                 <option value="9" th:selected="${category == 9}">イタリア料理</option>
+                                                 <option value="10" th:selected="${category == 10}">フランス料理</option>
+                                                 <option value="11" th:selected="${category == 11}">スペイン料理</option>
+                                                 <option value="12" th:selected="${category == 12}">韓国料理</option>
+                                                 <option value="13" th:selected="${category == 13}">タイ料理</option>
+                                                 <option value="14" th:selected="${category == 14}">海鮮料理</option>
+                                                 <option value="15" th:selected="${category == 15}">ステーキ</option>
+                                                 <option value="16" th:selected="${category == 16}">ハンバーグ</option>
+                                                 <option value="17" th:selected="${category == 17}">ハンバーガー</option>
+                                                 <option value="18" th:selected="${category == 18}">そば</option>
+                                                 <option value="19" th:selected="${category == 19}">うどん</option>
+                                                 <option value="20" th:selected="${category == 20}">お好み焼き</option>
+                                                 <option value="21" th:selected="${category == 21}">たこ焼き</option>
+                                                 <option value="22" th:selected="${category == 22}">鍋料理</option>
+                                                 <option value="23" th:selected="${category == 23}">バー</option>
+                                                 <option value="24" th:selected="${category == 24}">パン</option>
+                                                 <option value="25" th:selected="${category == 25}">スイーツ</option>
+                                                 <option value="26" th:selected="${category == 26}">和食</option>
+                                                 <option value="27" th:selected="${category == 27}">おでん</option>
+                                                 <option value="28" th:selected="${category == 28}">焼き鳥</option>
+                                                 <option value="29" th:selected="${category == 29}">すき焼き</option>
+                                                 <option value="30" th:selected="${category == 30}">しゃぶしゃぶ</option>
+                                                 <option value="31" th:selected="${category == 31}">天ぷら</option>
+                                                 <option value="32" th:selected="${category == 32}">揚げ物</option>
+                                                 <option value="33" th:selected="${category == 33}">丼物</option>
+                                                 <option value="34" th:selected="${category == 34}">鉄板焼き</option>
+                                                 <option value="35" th:selected="${category == 35}">カテゴリ未設定</option>
+                                             </select>                                                                          
+                                         </div>
+                                         <div class="form-group">
+                                             <button type="submit" class="btn text-white shadow-sm w-100 taberogu-btn">検索</button>
+                                         </div>                                           
+                                     </form>
+                                 </div>
+                             </div>                
+             
+                             <div class="card mb-3">
+                                 <div class="card-header">
+                                     予算から探す
+                                 </div>
+                                 <div class="card-body">
+                                     <form method="get" th:action="@{/restaurants}" class="w-100">
+                                         <div class="form-group mb-3">    
+                                             <select class="form-control form-select" name="price">
+                                                 <option value="" hidden>選択してください</option> 
+                                                 <option value="1,000円" th:selected="${price == '1,000'}">1,000円</option>
+                                                 <option value="2,000円" th:selected="${price == '2,000'}">2,000円</option>
+                                                 <option value="3,000円" th:selected="${price == '3,000'}">3,000円</option>
+                                                 <option value="4,000円" th:selected="${price == '4,000'}">4,000円</option>
+                                                 <option value="5,000円" th:selected="${price == '5,000'}">5,000円</option>
+                                                 <option value="6,000円" th:selected="${price == '6,000'}">6,000円</option>
+                                             </select>                                                                                
+                                         </div>
+                                         <div class="form-group">
+                                             <button type="submit" class="btn text-white shadow-sm w-100 taberogu-btn">検索</button>
+                                         </div>                                           
+                                     </form>
+                                 </div>
+                             </div>                               
+                         </div>
+             
+                         <div class="col">                                                                          
+                             <div class="d-flex justify-content-between flex-wrap">                                
+                                 <p th:if="${restaurantPage.getTotalPages() > 1}" class="fs-5 mb-3" th:text="${'検索結果：' + restaurantPage.getTotalElements() + '件' + '（' + (restaurantPage.getNumber() + 1) + ' / ' + restaurantPage.getTotalPages() + ' ページ）'}"></p> 
+                                 <p th:unless="${restaurantPage.getTotalPages() > 1}" class="fs-5 mb-3" th:text="${'検索結果：' + restaurantPage.getTotalElements() + '件'}"></p>                                 
+                                 
+                                 <form method="get" th:action="@{/restaurants}" class="mb-3 taberogu-sort-box"> 
+                                     <input th:if="${keyword}" type="hidden" name="keyword" th:value="${keyword}">
+                                     <input th:if="${category}" type="hidden" name="category" th:value="${category}">
+                                     <input th:if="${price}" type="hidden" name="price" th:value="${price}">                                 
+                                     <select class="form-select form-select-sm" name="order" onChange="this.form.submit();">
+                                         <option value="createdAtDesc" th:selected="${order == 'createdAtDesc' || order == null}">新着順</option>                                            
+                                         <option value="priceAsc" th:selected="${order == 'priceAsc'}">価格が安い順</option>
+                                     </select>   
+                                 </form> 
+                             </div>   
+                                                                         
+                             <div class="mb-3" th:each="restaurant : ${restaurantPage}">
+                                 <a th:href="@{/restaurants/__${restaurant.getId()}__}" class="link-dark taberogu-card-link">
+                                     <div class="card h-100">   
+                                         <div class="row g-0">
+                                             <div class="col-md-4">                                                                                
+                                                 <img th:if="${restaurant.getImageName()}" th:src="@{/storage/__${restaurant.getImageName()}__}" class="card-img-top taberogu-horizontal-card-image" alt="店舗画像">                                                     
+                                                 <img th:unless="${restaurant.getImageName()}" th:src="@{/images/noImage.png}" class="card-img-top taberogu-horizontal-card-image" alt="NO IMAGE">                                                    
+                                             </div> 
+                                             <div class="col-md-8">                                                                                                                        
+                                                 <div class="card-body">                                    
+                                                     <h3 class="card-title mb-3" th:text="${restaurant.getName()}"></h3>                                            
+  
+                                                     <hr class="mb-3">
+                                                     
+                                                     <p class="card-text mb-2">
+                                                         <span th:text="${restaurant.getDescription()}"></span>
+                                                     </p>                                                    
+                                                     
+                                                     <p class="card-text mb-2">
+                                                         <span th:text="${restaurant.getCategory().getName()}"></small>                                                   
+                                                     </p>   
+                                                                                                                                                                                                                                    
+                                                     <p class="card-text">
+                                                         <span th:text="${restaurant.getPrice()}"></span>
+                                                     </p>                                    
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>    
+                                 </a>            
+                             </div>                                                                                       
+             
+                             <!-- ページネーション -->
+                             <div th:if="${restaurantPage.getTotalPages() > 1}" class="d-flex justify-content-center">
+                                 <nav aria-label="店舗一覧ページ">
+                                     <ul class="pagination">
+                                         <li class="page-item">
+                                             <span th:if="${restaurantPage.isFirst()}" class="page-link disabled">前</span>
+                                             <a th:unless="${restaurantPage.isFirst()}" th:href="@{/restaurants(page = ${restaurantPage.getNumber() - 1}, keyword = ${keyword}, category = ${category}, price = ${price}, order = ${order})}" class="page-link taberogu-page-link">前</a>
+                                         </li>
+                                         <li th:each="i : ${#numbers.sequence(0, restaurantPage.getTotalPages() - 1)}" class="page-item">
+                                             <span th:if="${i == restaurantPage.getNumber()}" class="page-link active taberogu-active" th:text="${i + 1}"></span>
+                                             <a th:unless="${i == restaurantPage.getNumber()}" th:href="@{/restaurants(page = ${i}, keyword = ${keyword}, category = ${category}, price = ${price}, order = ${order})}" class="page-link taberogu-page-link" th:text="${i + 1}"></a>
+                                         </li>
+                                         <li class="page-item">                        
+                                             <span th:if="${restaurantPage.isLast()}" class="page-link disabled">次</span>
+                                             <a th:unless="${restaurantPage.isLast()}" th:href="@{/restaurants(page = ${restaurantPage.getNumber() + 1}, keyword = ${keyword}, category = ${category}, price = ${price}, order = ${order})}" class="page-link taberogu-page-link">次</a>
+                                         </li>
+                                     </ul>
+                                 </nav> 
+                             </div>                                      
+                         </div>
+                     </div>
+                 </div>  
+             </main>
+             
+             <!-- フッター -->
+             <div th:replace="~{fragment :: footer}"></div>
+         </div>    
+         
+         <div th:replace="~{fragment :: scripts}"></div>  
+   </body>
+ </html>

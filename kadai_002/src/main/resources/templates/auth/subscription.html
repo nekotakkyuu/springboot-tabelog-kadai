@@ -1,0 +1,60 @@
+ <!DOCTYPE html>
+ <html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+     <head>
+         <div th:replace="~{fragment :: meta}"></div>   
+              
+         <div th:replace="~{fragment :: styles}"></div> 
+         
+         <title>有料会員登録</title>       
+     </head>
+     <body>
+         <div class="taberogu-wrapper">
+             <!-- ヘッダー -->
+             <div th:replace="~{fragment :: header}"></div>
+             
+             <main>				 
+				  <div class="container taberogu-container pb-5">
+                     <div class="row justify-content-center">
+                         <nav class="my-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                             <ol class="breadcrumb mb-0">                        
+                                 <li class="breadcrumb-item"><a th:href="@{/}">ホーム</a></li>
+                                 <li class="breadcrumb-item active" aria-current="page">有料会員登録</li>
+                             </ol>
+                         </nav> 
+     
+                         <div class="col-xl-3 col-lg-4 col-md-5 col-sm-7">                            
+                             <h1 class="mb-4 text-center">有料会員登録</h1> 
+                             
+                             <div th:object="${subscriptionForm}">
+                                 <input type="hidden" th:field="*{user_id}">    
+                                 <input type="hidden" id="3" name="role" value=3>            　　　　
+                             
+                                 <div class="form-group mb-3">
+                                     ○ 月額300円で店舗の予約とレビューを投稿できるようになります。
+                                 </div>
+                                 
+                                 <div class="form-group d-flex justify-content-center my-4">
+									 <input type="hidden" name="priceId" value="price_1OrdNNG4Bw3H42qs0C2leKLA"/>
+                                     <button id="paymentButton" class="btn text-white shadow-sm w-100 taberogu-btn">有料会員登録</button>
+                                 </div>
+                             </div> 
+                          </div>                                                 
+                      </div>
+                   </div>
+                
+               </main>           
+            </div>
+             
+             <!-- フッター -->
+             <div th:replace="~{fragment :: footer}"></div>
+         </div>    
+         
+         <div th:replace="~{fragment :: scripts}"></div>       
+       
+		<script src="https://js.stripe.com/v3"></script>
+		<script th:inline="javascript">
+			const sessionId = /*[[${sessionId}]]*/"sessionId";                   
+		</script>        
+		<script th:src="@{/js/stripe.js}"></script>   
+     </body>
+ </html>

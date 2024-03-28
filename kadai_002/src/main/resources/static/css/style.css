@@ -1,0 +1,159 @@
+ html {
+   font-size: 14px;
+ }
+ 
+ body {
+   font-family: 'Noto Sans JP', sans-serif;  
+ }
+ 
+ h1 {
+   font-size: 1.5rem;
+ }
+ 
+ h2 {
+   font-size: 1.475rem;
+ }
+ 
+ h3 {
+   font-size: 1.25rem;
+ }
+ 
+ a {
+   color: #5196a6;
+   text-decoration: none !important;
+ }
+ 
+ a:hover {
+     color: #407784;
+ }
+ 
+ footer {
+   width: 100%;
+   height: 60px;
+   position: absolute;
+   bottom: 0;    
+   background-color: #f2f0eb;
+ }
+ 
+ .taberogu-wrapper {
+   min-height: 100vh;
+   position: relative;
+   padding-bottom: 60px;
+   box-sizing: border-box;
+ }
+ 
+ .taberogu-navbar {
+   min-height: 60px;
+ }
+ 
+ .taberogu-logo {
+   height: 50px;  
+ }
+ 
+ .taberogu-btn {
+   background-color: #5196a6 !important;   
+   transition: 0.1s;
+ }
+ 
+ .taberogu-btn:hover {
+   opacity: 0.8;   
+ }
+ 
+  .taberogu-page-link {
+   color: #5196a6;
+ }
+ 
+ .taberogu-page-link:hover {
+   color: #407784;
+ }
+ 
+ .taberogu-active {
+   background-color: #5196a6 !important;
+   border-color: #5196a6 !important;
+ }
+ 
+  .taberogu-pre-wrap {
+   /* 改行文字で行を折り返す */
+   white-space: pre-wrap;
+ }
+ 
+ .taberogu-link-danger {
+     color: #f2594b;
+ }
+ 
+ .taberogu-link-danger:hover {
+     color: #a63c3c;
+ }
+ 
+ .taberogu-btn-danger {
+     background-color: #f2594b !important;
+     transition: 0.1s;
+ }
+ 
+ .taberogu-btn-danger:hover {
+   opacity: 0.8;   
+ }
+ 
+ .taberogu-dropdown-item:active {
+   background-color: #5196a6;
+ }
+ 
+  .taberogu-card-link {
+   transition: 0.3s;
+ }
+ 
+ .taberogu-card-link:hover {
+   opacity: 0.7;
+ }
+ 
+ .taberogu-horizontal-card-image {
+   width: 100%;
+   height: 240px;
+   object-fit: cover;
+ }
+ 
+  .taberogu-sort-box {
+   width: 150px;
+ }
+ 
+  .taberogu-vertical-card-image {
+   width: 100%;
+   height: 150px;
+   object-fit: cover;
+ }
+ 
+ .taberogu-search-form {
+     max-width: 300px;
+ }
+ 
+.star-rating {
+  position: relative;
+  width: 5em;
+  height: 1em;
+  font-size: 17px;
+}
+
+.star-rating-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: calc(var(--score) * 10%);
+  white-space: nowrap;
+  color: #ffcc33;
+  height: 25px;
+}
+
+.star-rating-back {
+  color: #ccc;
+} 
+  
+.star-color {
+	color: #ffcc33;
+}
+ 
+ @media screen and (min-width: 1400px) {
+   .taberogu-container {
+     max-width: 1200px;
+   }
+ }

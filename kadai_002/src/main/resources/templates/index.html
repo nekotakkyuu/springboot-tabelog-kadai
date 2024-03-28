@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+         <div th:replace="~{fragment :: meta}"></div>   
+              
+         <div th:replace="~{fragment :: styles}"></div>
+        
+		<title>taberogu</title>
+	</head>
+	<body>
+         <div class="taberogu-wrapper">
+             <!-- ヘッダー -->
+             <div th:replace="~{fragment :: header}"></div>
+             
+             <main>
+                 <div class="container pt-4 pb-5 taberogu-container">
+                     <div th:if="${param.loggedIn}" class="alert alert-info">
+                         ログインしました。
+                     </div>  
+                     
+                     <div th:if="${param.loggedOut}" class="alert alert-info">
+                         ログアウトしました。
+                     </div>
+                     
+                     <div th:if="${successMessage}" class="alert alert-info">
+                         <span th:text="${successMessage}"></span>
+                     </div>            
+                     
+                     <div class="d-flex justify-content-center">                                            
+                         <form method="get" th:action="@{/restaurants}" class="mb-5 taberogu-search-form">
+                             <div class="input-group">
+                                 <input type="text" class="form-control" name="keyword" th:value="${keyword}" placeholder="店舗名・エリア">
+                                 <button type="submit" class="btn text-white shadow-sm taberogu-btn">検索</button> 
+                             </div>               
+                         </form>                        
+                     </div>                                                                                                  
+                                                      
+                     <h2 class="text-center mb-3">新着</h2>
+                     <div class="row row-cols-lg-5 row-cols-2 g-3 mb-5">                                        
+                         <div class="col" th:each="newRestaurant : ${newRestaurants}">
+                             <a th:href="@{/restaurants/__${newRestaurant.getId()}__}" class="link-dark taberogu-card-link">
+                                 <div class="card h-100">                                                                        
+                                     <img th:if="${newRestaurant.getImageName()}" th:src="@{/storage/__${newRestaurant.getImageName()}__}" class="card-img-top taberogu-vertical-card-image" alt="店舗画像">                                     
+                                     <img th:unless="${newRestaurant.getImageName()}" th:src="@{/images/noImage.png}" class="card-img-top taberogu-vertical-card-image" alt="NO IMAGE">                                                                                                                        
+                                     <div class="card-body">                                    
+                                         <h3 class="card-title" th:text="${newRestaurant.getName()}"></h3>
+                                         <p class="card-text mb-1">
+                                             <small class="text-muted" th:text="${newRestaurant.getAddress()}"></small>                                            
+                                         </p>
+                                         <p class="card-text">
+                                             <span th:text="${newRestaurant.getPrice()}"></span>                                            
+                                         </p>                                    
+                                     </div>
+                                 </div>    
+                             </a>            
+                         </div>                                               
+                     </div>
+                     
+                     <div class="row justify-content-center">
+                         <div class="row row-cols-lg-5 row-cols-2 g-3 mb-5">                    
+                     
+                             <h2 class="text-center mb-3">カテゴリから探す</h2>                                        
+                              
+                             <table class="table">
+                                 <tbody>     
+									 <tr> 
+										 <td>                                              
+                                             <a th:href="@{/restaurants?category=1}" class="me-2">居酒屋</a>
+                                             <a th:href="@{/restaurants?category=2}" class="me-2">焼肉</a>
+                                             <a th:href="@{/restaurants?category=3}" class="me-2">寿司</a>
+                                             <a th:href="@{/restaurants?category=4}" class="me-2">ラーメン</a>
+                                             <a th:href="@{/restaurants?category=5}" class="me-2">定食</a>
+                                             <a th:href="@{/restaurants?category=6}" class="me-2">カレー</a>
+                                             <a th:href="@{/restaurants?category=7}" class="me-2">喫茶店</a>
+                                             <a th:href="@{/restaurants?category=8}" class="me-2">中華料理</a>
+                                             <a th:href="@{/restaurants?category=9}" class="me-2">イタリア料理</a>
+                                             <a th:href="@{/restaurants?category=10}" class="me-2">フランス料理</a>                                    
+                                             <a th:href="@{/restaurants?category=11}" class="me-2">スペイン料理</a>
+                                             <a th:href="@{/restaurants?category=12}" class="me-2">韓国料理</a>
+                                             <a th:href="@{/restaurants?category=13}" class="me-2">タイ料理</a>
+                                             <a th:href="@{/restaurants?category=14}" class="me-2">海鮮料理</a>
+                                             <a th:href="@{/restaurants?category=15}" class="me-2">ステーキ</a>
+                                             <a th:href="@{/restaurants?category=16}" class="me-2">ハンバーグ</a>
+                                             <a th:href="@{/restaurants?category=17}" class="me-2">ハンバーガー</a> 
+                                             <a th:href="@{/restaurants?category=18}" class="me-2">そば</a> 
+                                             <a th:href="@{/restaurants?category=19}" class="me-2">うどん</a> 
+                                             <a th:href="@{/restaurants?category=20}" class="me-2">お好み焼き</a> 
+                                             <a th:href="@{/restaurants?category=21}" class="me-2">たこ焼き</a> 
+                                             <a th:href="@{/restaurants?category=22}" class="me-2">鍋料理</a> 
+                                             <a th:href="@{/restaurants?category=23}" class="me-2">バー</a> 
+                                             <a th:href="@{/restaurants?category=24}" class="me-2">パン</a> 
+                                             <a th:href="@{/restaurants?category=25}" class="me-2">スイーツ</a> 
+                                             <a th:href="@{/restaurants?category=26}" class="me-2">和食</a> 
+                                             <a th:href="@{/restaurants?category=27}" class="me-2">おでん</a> 
+                                             <a th:href="@{/restaurants?category=28}" class="me-2">焼き鳥</a> 
+                                             <a th:href="@{/restaurants?category=29}" class="me-2">すき焼き</a> 
+                                             <a th:href="@{/restaurants?category=30}" class="me-2">しゃぶしゃぶ</a> 
+                                             <a th:href="@{/restaurants?category=31}" class="me-2">天ぷら</a> 
+                                             <a th:href="@{/restaurants?category=32}" class="me-2">揚げ物</a> 
+                                             <a th:href="@{/restaurants?category=33}" class="me-2">丼物</a> 
+                                             <a th:href="@{/restaurants?category=34}" class="me-2">鉄板焼き</a> 
+                                             <a th:href="@{/restaurants?category=35}" class="me-2">カテゴリ未設定</a> 
+                                         <td>                                      
+                                     </tr>                                                                                                                                                                                                                                                                                                                                             
+                                 </tbody>
+                             </table>  
+                         </div>
+                     </div>                      
+                 </div>
+             </main>
+             
+             <!-- フッター -->
+             <div th:replace="~{fragment :: footer}"></div>
+         </div>    
+         
+         <div th:replace="~{fragment :: scripts}"></div>  		
+	</body>
+</html>
